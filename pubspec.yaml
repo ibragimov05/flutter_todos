@@ -4,23 +4,34 @@ version: 1.0.0+1
 publish_to: none
 
 environment:
-  sdk: ^3.4.0
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  bloc: ^8.1.4
   flutter:
     sdk: flutter
-  flutter_bloc: ^8.1.6
   flutter_localizations:
     sdk: flutter
+
+  flutter_bloc: ^8.1.6
+  bloc: ^8.1.4
+  equatable: ^2.0.5
   intl: ^0.19.0
 
+
+  local_storage_todos_api:
+    path: packages/local_storage_todos_api
+  todos_api:
+    path: packages/todos_api
+  todos_repository:
+    path: packages/todos_repository
+
 dev_dependencies:
-  bloc_test: ^9.1.7
   flutter_test:
     sdk: flutter
+
+  bloc_test: ^9.1.7
+  mockingjay: ^0.6.0
   mocktail: ^1.0.4
-  very_good_analysis: ^6.0.0
 
 flutter:
   uses-material-design: true

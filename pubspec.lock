@@ -118,6 +118,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.1"
+  equatable:
+    dependency: "direct main"
+    description:
+      name: equatable
+      sha256: c2b87cb7756efdf69892005af546c56c0b5037f54d2a88269b4f347a505e3ca2
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.5"
   fake_async:
     dependency: transitive
     description:
@@ -237,6 +245,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
+  local_storage_todos_api:
+    dependency: "direct main"
+    description:
+      path: "packages/local_storage_todos_api"
+      relative: true
+    source: path
+    version: "0.1.0+1"
   logging:
     dependency: transitive
     description:
@@ -285,6 +300,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
+  mockingjay:
+    dependency: "direct dev"
+    description:
+      name: mockingjay
+      sha256: cea2f3d38d1343beb6908f0ade5724c12304ee74014fbd274b4065a4b7db6536
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.6.0"
   mocktail:
     dependency: "direct dev"
     description:
@@ -466,6 +489,20 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.4"
+  todos_api:
+    dependency: "direct main"
+    description:
+      path: "packages/todos_api"
+      relative: true
+    source: path
+    version: "0.1.0+1"
+  todos_repository:
+    dependency: "direct main"
+    description:
+      path: "packages/todos_repository"
+      relative: true
+    source: path
+    version: "0.1.0+1"
   typed_data:
     dependency: transitive
     description:
@@ -482,14 +519,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
-  very_good_analysis:
-    dependency: "direct dev"
-    description:
-      name: very_good_analysis
-      sha256: "1fb637c0022034b1f19ea2acb42a3603cbd8314a470646a59a2fb01f5f3a8629"
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.0.0"
   vm_service:
     dependency: transitive
     description:
@@ -547,5 +576,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.4.0 <4.0.0"
-  flutter: ">=3.18.0-18.0.pre.54"
+  dart: ">=3.5.0 <4.0.0"
+  flutter: ">=3.24.0"
