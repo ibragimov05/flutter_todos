@@ -1,33 +1,32 @@
-import 'dart:async';
-import 'dart:developer';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_todos/l10n/l10n.dart';
+import 'package:flutter_todos/theme/theme.dart';
+import 'package:todos_repository/todos_repository.dart';
 
-import 'package:bloc/bloc.dart';
-import 'package:flutter/widgets.dart';
+class App extends StatelessWidget {
+  final TodosRepository todosRepository;
 
-class AppBlocObserver extends BlocObserver {
-  const AppBlocObserver();
-
-  @override
-  void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
-    super.onChange(bloc, change);
-    log('onChange(${bloc.runtimeType}, $change)');
-  }
+  const App({super.key, required this.todosRepository});
 
   @override
-  void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {
-    log('onError(${bloc.runtimeType}, $error, $stackTrace)');
-    super.onError(bloc, error, stackTrace);
-  }
+  Widget build(BuildContext context) => RepositoryProvider.value(
+        value: todosRepository,
+        child: const AppView(),
+      );
 }
 
-Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
-  FlutterError.onError = (details) {
-    log(details.exceptionAsString(), stackTrace: details.stack);
-  };
+class AppView extends StatelessWidget {
+  const AppView();
 
-  Bloc.observer = const AppBlocObserver();
-
-  // Add cross-flavor configuration here
-
-  runApp(await builder());
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: FlutterTodosTheme.light,
+      darkTheme: FlutterTodosTheme.dark,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: const HomePage(),
+    );
+  }
 }
