@@ -11,6 +11,3 @@ Future<void> main() async {
 
   bootstrap(todosApi: todosApi);
 }
-
-void bootstrap({required LocalStorageTodosApi todosApi}) {
-}

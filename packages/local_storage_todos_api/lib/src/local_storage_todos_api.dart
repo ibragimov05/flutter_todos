@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:rxdart/rxdart.dart';
 import 'package:flutter/foundation.dart';
 import 'package:todos_api/todos_api.dart';
-import 'package:todos_api/src/models/todo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorageTodosApi extends TodosApi {

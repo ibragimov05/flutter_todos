@@ -8,4 +8,3 @@ class HomeCubit extends Cubit<HomeState> {
 
   void setTab(HomeTab tab) => emit(HomeState(tab: tab));
 }
-

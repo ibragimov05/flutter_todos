@@ -23,6 +23,11 @@ class TodosRepository {
   /// If no `todo` with the given id exists, a [TodoNotFoundException] error is thrown
   Future<void> deleteTodo(String id) => _todosApi.deleteTodo(id);
 
+  /// Deletes all completed todos
+  ///
+  /// Returns number of deleted todos.
+  Future<int> clearCompleted() => _todosApi.clearCompleted();
+
   /// Sets the `isCompleted` state of all todos to the given value.
   ///
   /// Returns the number of updated todos.
