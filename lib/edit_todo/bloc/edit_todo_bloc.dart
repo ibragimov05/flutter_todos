@@ -53,7 +53,7 @@ class EditTodoBloc extends Bloc<EditTodoEvent, EditTodoState> {
     );
 
     try {
-      await _todosRepository.saveTodo(todo);
+      await _todosRepository.saveTodo(todo: todo);
       emit(state.copyWith(status: EditTodoStatus.success));
     } catch (e) {
       emit(state.copyWith(status: EditTodoStatus.failure));

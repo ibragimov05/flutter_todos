@@ -26,7 +26,7 @@ class StatsBloc extends Bloc<StatsEvent, StatsState> {
     final userID = FirebaseAuth.instance.currentUser?.uid ?? '';
 
     await emit.forEach<List<Todo>>(
-      _todosRepository.getTodos(userID: userID),
+      _todosRepository.getTodos(userId: userID),
       onData: (todos) => state.copyWith(
         status: StatsStatus.success,
         completedTodos: todos.where((todo) => todo.isCompleted).length,

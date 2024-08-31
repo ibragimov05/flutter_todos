@@ -73,7 +73,8 @@ class DefaultFirebaseOptions {
     projectId: 'login-sign-up-user',
     databaseURL: 'https://login-sign-up-user-default-rtdb.firebaseio.com',
     storageBucket: 'login-sign-up-user.appspot.com',
-    iosClientId: '123700400153-egsf14rdc8qvhpvoa30h2d88uvcmlkgu.apps.googleusercontent.com',
+    iosClientId:
+        '123700400153-egsf14rdc8qvhpvoa30h2d88uvcmlkgu.apps.googleusercontent.com',
     iosBundleId: 'com.example.verygoodcore.flutter-todos',
   );
 }

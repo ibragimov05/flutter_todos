@@ -18,6 +18,7 @@ class TodoListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     final captionColor = theme.textTheme.bodySmall?.color;
 
     return Dismissible(

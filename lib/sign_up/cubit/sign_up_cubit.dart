@@ -22,6 +22,7 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   void passwordChanged(String value) {
     final password = Password.dirty(value);
+
     final confirmedPassword = ConfirmedPassword.dirty(
       password: password.value,
       value: state.confirmedPassword.value,
@@ -43,6 +44,7 @@ class SignUpCubit extends Cubit<SignUpState> {
       password: state.password.value,
       value: value,
     );
+
     emit(state.copyWith(
       confirmedPassword: confirmedPassword,
       isValid: Formz.validate([
@@ -55,6 +57,7 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   void signUpFormSubmitted() async {
     if (!state.isValid) return;
+
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
 
     try {
@@ -62,6 +65,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         email: state.email.value,
         password: state.password.value,
       );
+
       emit(state.copyWith(status: FormzSubmissionStatus.success));
     } on SignUpWithEmailAndPasswordFailure catch (e) {
       emit(state.copyWith(

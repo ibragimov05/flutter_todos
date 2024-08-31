@@ -1,13 +1,13 @@
-import 'package:authentication_repository/authentication_repository.dart';
-import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_todos/app/bloc/app_bloc.dart';
-import 'package:flutter_todos/app/routes/routes.dart';
 import 'package:flutter_todos/l10n/l10n.dart';
-import 'package:flutter_todos/theme/theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flow_builder/flow_builder.dart';
 import 'package:todos_repository/todos_repository.dart';
+import 'package:authentication_repository/authentication_repository.dart';
 
+import '../bloc/app_bloc.dart';
+import '../routes/routes.dart';
+import '../../theme/theme.dart';
 
 class App extends StatelessWidget {
   final AuthenticationRepository _authenticationRepository;

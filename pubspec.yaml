@@ -25,7 +25,7 @@ dependencies:
   google_sign_in: ^6.2.1
 
 
-  local_storage_todos_api:
+  firestore_todos_api:
     path: packages/firestore_todos_api
   todos_api:
     path: packages/todos_api

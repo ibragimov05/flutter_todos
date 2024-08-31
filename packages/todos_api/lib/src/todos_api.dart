@@ -4,18 +4,18 @@ abstract class TodosApi {
   const TodosApi();
 
   /// Provides s [Stream] of all todos.
-  Stream<List<Todo>> getTodos(String userID);
+  Stream<List<Todo>> getTodos({required String userId});
 
   /// Saves a [todo].
-  Future<void> saveTodo(Todo todo);
+  Future<void> saveTodo({required Todo todo});
 
   /// Edits a [Todo]
-  Future<void> editTodo(Todo todo);
+  Future<void> editTodo({required Todo todo});
 
   /// Deletes a `todo` with the given id
   ///
   /// if no `todo` with the given id exists, a [TodoNotFoundException] error is thrown
-  Future<void> deleteTodo(String id);
+  Future<void> deleteTodo({required String id});
 
   /// Deletes all completed todos.
   ///
@@ -26,7 +26,6 @@ abstract class TodosApi {
   ///
   /// Returns the number of updated todos.
   Future<int> completeAll({required bool isCompleted});
-
 }
 
 /// Error thrown when a [Todo] with the given id is not found.

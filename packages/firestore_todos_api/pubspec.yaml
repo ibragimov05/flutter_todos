@@ -1,4 +1,4 @@
-name: local_storage_todos_api
+name: firestore_todos_api
 description: A Flutter implementation of the TodosApi that uses local storage.
 version: 1.0.0+1
 publish_to: none

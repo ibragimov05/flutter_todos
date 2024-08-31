@@ -33,7 +33,7 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
     final userID = FirebaseAuth.instance.currentUser?.uid ?? '';
 
     await emit.forEach<List<Todo>>(
-      _todosRepository.getTodos(userID: userID),
+      _todosRepository.getTodos(userId: userID),
       onData: (todos) => state.copyWith(
         status: () => TodosOverviewStatus.success,
         todos: () => todos,
@@ -51,7 +51,8 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
     Emitter<TodosOverviewState> emit,
   ) async {
     final newTodo = event.todo.copyWith(isCompleted: event.isCompleted);
-    await _todosRepository.editTodo(newTodo);
+
+    await _todosRepository.editTodo(todo: newTodo);
   }
 
   Future<void> _onTodoDeleted(
@@ -59,7 +60,8 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
     Emitter<TodosOverviewState> emit,
   ) async {
     emit(state.copyWith(lastDeletedTodo: () => event.todo));
-    await _todosRepository.deleteTodo(event.todo.id);
+
+    await _todosRepository.deleteTodo(id: event.todo.id);
   }
 
   Future<void> _onUndoDeletionRequested(
@@ -72,8 +74,10 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
     );
 
     final todo = state.lastDeletedTodo!;
+
     emit(state.copyWith(lastDeletedTodo: () => null));
-    await _todosRepository.saveTodo(todo);
+
+    await _todosRepository.saveTodo(todo: todo);
   }
 
   void _onFilterChanged(
@@ -87,6 +91,7 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
     Emitter<TodosOverviewState> emit,
   ) async {
     final areAllCompleted = state.todos.every((todo) => todo.isCompleted);
+
     await _todosRepository.completeAll(isCompleted: !areAllCompleted);
   }
 

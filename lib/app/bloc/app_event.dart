@@ -1,8 +1,11 @@
 part of 'app_bloc.dart';
 
 @immutable
-sealed class AppEvent {
+sealed class AppEvent extends Equatable {
   const AppEvent();
+
+  @override
+  List<Object> get props => [];
 }
 
 final class AppLogoutRequested extends AppEvent {

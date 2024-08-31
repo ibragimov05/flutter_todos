@@ -20,7 +20,4 @@ dependencies:
 dev_dependencies:
   firebase_auth_platform_interface: ^7.4.4
   firebase_core_platform_interface: ^5.2.1
-  flutter_test:
-    sdk: flutter
-  mocktail: ^1.0.4
   plugin_platform_interface: ^2.1.8

@@ -6,34 +6,28 @@ class FirestoreTodosApi extends TodosApi {
       FirebaseFirestore.instance.collection('todos');
 
   @override
-  Stream<List<Todo>> getTodos(String uid) {
-    print(uid);
-    return _todoCollection
-        .where('userId', isEqualTo: uid)
-        .snapshots()
-        .map((querySnapshot) {
-      return querySnapshot.docs.map((doc) {
-        Map<String, dynamic> data = doc.data();
-        data['id'] = doc.id;
-        return Todo.fromJson(data);
-      }).toList();
-    });
-  }
+  Stream<List<Todo>> getTodos({required String userId}) => _todoCollection
+          .where('userId', isEqualTo: userId)
+          .snapshots()
+          .map((querySnapshot) {
+        return querySnapshot.docs.map((doc) {
+          Map<String, dynamic> data = doc.data();
+          data['id'] = doc.id;
+          return Todo.fromJson(data);
+        }).toList();
+      });
 
   @override
-  Future<void> saveTodo(Todo todo) {
-    return _todoCollection.add(todo.toJson());
-  }
+  Future<void> saveTodo({required Todo todo}) =>
+      _todoCollection.add(todo.toJson());
 
   @override
-  Future<void> editTodo(Todo todo) {
-    return _todoCollection.doc(todo.id).update(todo.toJson());
-  }
+  Future<void> editTodo({required Todo todo}) =>
+      _todoCollection.doc(todo.id).update(todo.toJson());
 
   @override
-  Future<void> deleteTodo(String id) async {
-    await _todoCollection.doc(id).delete();
-  }
+  Future<void> deleteTodo({required String id}) async =>
+      await _todoCollection.doc(id).delete();
 
   @override
   Future<int> clearCompleted() async {
@@ -63,5 +57,4 @@ class FirestoreTodosApi extends TodosApi {
     await batch.commit();
     return querySnapshot.size;
   }
-
 }

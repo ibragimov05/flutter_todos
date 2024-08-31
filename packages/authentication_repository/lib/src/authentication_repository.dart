@@ -34,13 +34,11 @@ class AuthenticationRepository {
   /// Stream of [User] which will emit the current user when
   /// the authentication changes
   /// Emits [User.empty] if the use is not authenticated
-  Stream<User> get user {
-    return _firebaseAuth.authStateChanges().map((firebaseUser) {
-      final user = firebaseUser == null ? User.empty : firebaseUser.toUser;
-      _cache.write(key: userCacheKey, value: user);
-      return user;
-    });
-  }
+  Stream<User> get user => _firebaseAuth.authStateChanges().map((firebaseUser) {
+        final user = firebaseUser == null ? User.empty : firebaseUser.toUser;
+        _cache.write(key: userCacheKey, value: user);
+        return user;
+      });
 
   /// Returns the current cached user
   /// Default to [User.empty] if there is not cached user.

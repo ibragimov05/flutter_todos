@@ -11,20 +11,19 @@ class TodosRepository {
   }) : _todosApi = todosApi;
 
   /// Provides a [Stream] of all todos.
-  Stream<List<Todo>> getTodos({required String userID}) =>
-      _todosApi.getTodos(userID);
+  Stream<List<Todo>> getTodos({required String userId}) =>
+      _todosApi.getTodos(userId: userId);
 
   /// Saves a [todo]
-  Future<void> saveTodo(Todo todo) => _todosApi.saveTodo(todo);
-
+  Future<void> saveTodo({required Todo todo}) => _todosApi.saveTodo(todo: todo);
 
   /// Edits a [todo]
-  Future<void> editTodo(Todo todo) => _todosApi.editTodo(todo);
+  Future<void> editTodo({required Todo todo}) => _todosApi.editTodo(todo: todo);
 
   /// Deletes the `todo` with the given id.
   ///
   /// If no `todo` with the given id exists, a [TodoNotFoundException] error is thrown
-  Future<void> deleteTodo(String id) => _todosApi.deleteTodo(id);
+  Future<void> deleteTodo({required String id}) => _todosApi.deleteTodo(id: id);
 
   /// Deletes all completed todos
   ///

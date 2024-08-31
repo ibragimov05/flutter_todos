@@ -17,7 +17,6 @@ class ConfirmedPassword
       : super.dirty(value);
 
   @override
-  ConfirmedPasswordValidationError? validator(String? value) {
-    return password == value ? null : ConfirmedPasswordValidationError.invalid;
-  }
+  ConfirmedPasswordValidationError? validator(String? value) =>
+      password == value ? null : ConfirmedPasswordValidationError.invalid;
 }

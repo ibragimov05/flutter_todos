@@ -1,8 +1,8 @@
-import 'package:authentication_repository/authentication_repository.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firestore_todos_api/firestore_todos_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_todos/bootstrap.dart';
-import 'package:local_storage_todos_api/local_storage_todos_api.dart';
+import 'package:authentication_repository/authentication_repository.dart';
 
 import 'firebase_options.dart';
 
@@ -14,8 +14,7 @@ Future<void> main() async {
   final authenticationRepository = AuthenticationRepository();
   await authenticationRepository.user.first;
 
-  final todosApi = FirestoreTodosApi(
-  );
+  final todosApi = FirestoreTodosApi();
 
   bootstrap(
     todosApi: todosApi,
