@@ -35,6 +35,7 @@
 
 import 'dart:developer';
 
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
@@ -44,7 +45,9 @@ import 'package:todos_repository/todos_repository.dart';
 
 import 'app/app_bloc_observer.dart';
 
-void bootstrap({required TodosApi todosApi}) {
+void bootstrap(
+    {required TodosApi todosApi,
+    required AuthenticationRepository authenticationRepository}) {
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
@@ -58,5 +61,10 @@ void bootstrap({required TodosApi todosApi}) {
 
   final todosRepository = TodosRepository(todosApi: todosApi);
 
-  runApp(App(todosRepository: todosRepository));
+  runApp(
+    App(
+      authenticationRepository: authenticationRepository,
+      todosRepository: todosRepository,
+    ),
+  );
 }

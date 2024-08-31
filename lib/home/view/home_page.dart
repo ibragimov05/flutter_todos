@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todos/edit_todo/view/edit_todo_page.dart';
@@ -8,6 +9,8 @@ import '../../todos_overview/view/view.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
+
+  static Page<void> page() => const CupertinoPage<void>(child: HomePage());
 
   @override
   Widget build(BuildContext context) => BlocProvider(

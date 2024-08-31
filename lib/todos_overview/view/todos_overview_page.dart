@@ -35,6 +35,7 @@ class TodosOverviewView extends StatelessWidget {
         actions: [
           TodosOverviewFilterButton(),
           TodosOverviewOptionsButton(),
+          TodosOverviewLogoutButton(),
         ],
       ),
       body: MultiBlocListener(
