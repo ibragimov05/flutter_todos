@@ -29,6 +29,8 @@ class TodosOverviewView extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
+    final todoBloc = context.read<TodosOverviewBloc>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.todosOverviewAppBarTitle),
@@ -75,8 +77,7 @@ class TodosOverviewView extends StatelessWidget {
                       label: l10n.todosOverviewUndoDeletionButtonText,
                       onPressed: () {
                         messenger.hideCurrentSnackBar();
-                        context
-                            .read<TodosOverviewBloc>()
+                        todoBloc
                             .add(const TodosOverviewUndoDeletionRequested());
                       },
                     ),
@@ -108,16 +109,20 @@ class TodosOverviewView extends StatelessWidget {
                   final todo = todoState.todos[index];
                   return TodoListTile(
                     todo: todo,
-                    onToggleCompleted: (isCompleted) =>
-                        context.read<TodosOverviewBloc>().add(
-                              TodosOverviewTodoCompletionToggled(
+                    onToggleCompleted: (isCompleted) => todoBloc.add(
+                      TodosOverviewTodoCompletionToggled(
                                 todo: todo,
                                 isCompleted: isCompleted,
                               ),
                             ),
-                    onDismissed: (_) => context.read<TodosOverviewBloc>().add(
-                          TodosOverviewTodoDeleted(todo: todo),
-                        ),
+                    onDismissed: (_) {
+                      todoBloc.state.todos.removeWhere(
+                        (element) => element.id == todo.id,
+                      );
+                      todoBloc.add(
+                        TodosOverviewTodoDeleted(todo: todo),
+                      );
+                    },
                     onTap: () => Navigator.of(context).push(
                       EditTodoPage.route(initialTodo: todo),
                     ),

@@ -26,7 +26,7 @@ dependencies:
 
 
   local_storage_todos_api:
-    path: packages/local_storage_todos_api
+    path: packages/firestore_todos_api
   todos_api:
     path: packages/todos_api
   todos_repository:
@@ -35,6 +35,8 @@ dependencies:
     path: packages/authentication_repository
   form_inputs:
     path: packages/form_inputs
+  cloud_firestore: ^5.3.0
+  firebase_auth: ^5.2.0
 
 dev_dependencies:
   flutter_lints: 4.0.0

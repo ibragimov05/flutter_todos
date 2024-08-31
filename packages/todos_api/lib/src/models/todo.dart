@@ -10,10 +10,15 @@ part 'todo.g.dart';
 @immutable
 @JsonSerializable()
 class Todo extends Equatable {
-  /// The unique identifier of the  `todo`.
+  /// The unique identifier of the `todo`.
   ///
   /// Cannot be empty.
   final String id;
+
+  /// User id of the `todo`
+  ///
+  /// Cannot be empty
+  final String userId;
 
   /// The title of `todo`.
   ///
@@ -32,6 +37,7 @@ class Todo extends Equatable {
 
   Todo({
     required this.title,
+    required this.userId,
     String? id,
     this.description = '',
     this.isCompleted = false,
@@ -50,6 +56,7 @@ class Todo extends Equatable {
   }) =>
       Todo(
         id: id ?? this.id,
+        userId: userId,
         title: title ?? this.title,
         description: description ?? this.description,
         isCompleted: isCompleted ?? this.isCompleted,

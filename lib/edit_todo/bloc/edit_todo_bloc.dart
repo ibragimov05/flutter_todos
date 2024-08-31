@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:todos_repository/todos_repository.dart';
 
 part 'edit_todo_event.dart';
@@ -43,7 +44,10 @@ class EditTodoBloc extends Bloc<EditTodoEvent, EditTodoState> {
   ) async {
     emit(state.copyWith(status: EditTodoStatus.loading));
 
-    final Todo todo = (state.initialTodo ?? Todo(title: '')).copyWith(
+    final userID = FirebaseAuth.instance.currentUser?.uid ?? '';
+
+    final Todo todo =
+        (state.initialTodo ?? Todo(title: '', userId: userID)).copyWith(
       title: state.title,
       description: state.description,
     );

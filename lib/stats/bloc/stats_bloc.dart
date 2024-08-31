@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:todos_repository/todos_repository.dart';
 
 part 'stats_event.dart';
@@ -22,8 +23,10 @@ class StatsBloc extends Bloc<StatsEvent, StatsState> {
   ) async {
     emit(state.copyWith(status: StatsStatus.loading));
 
+    final userID = FirebaseAuth.instance.currentUser?.uid ?? '';
+
     await emit.forEach<List<Todo>>(
-      _todosRepository.getTodos(),
+      _todosRepository.getTodos(userID: userID),
       onData: (todos) => state.copyWith(
         status: StatsStatus.success,
         completedTodos: todos.where((todo) => todo.isCompleted).length,

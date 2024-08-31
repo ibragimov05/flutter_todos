@@ -11,12 +11,15 @@ class TodosRepository {
   }) : _todosApi = todosApi;
 
   /// Provides a [Stream] of all todos.
-  Stream<List<Todo>> getTodos() => _todosApi.getTodos();
+  Stream<List<Todo>> getTodos({required String userID}) =>
+      _todosApi.getTodos(userID);
 
   /// Saves a [todo]
-  ///
-  /// If a [todo] with the same id already exists, it will be replaced.
   Future<void> saveTodo(Todo todo) => _todosApi.saveTodo(todo);
+
+
+  /// Edits a [todo]
+  Future<void> editTodo(Todo todo) => _todosApi.editTodo(todo);
 
   /// Deletes the `todo` with the given id.
   ///

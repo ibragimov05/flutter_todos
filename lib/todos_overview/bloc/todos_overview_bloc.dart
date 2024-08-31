@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:todos_repository/todos_repository.dart';
 
 import '../models/models.dart';
@@ -29,15 +30,19 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
   ) async {
     emit(state.copyWith(status: () => TodosOverviewStatus.loading));
 
+    final userID = FirebaseAuth.instance.currentUser?.uid ?? '';
+
     await emit.forEach<List<Todo>>(
-      _todosRepository.getTodos(),
+      _todosRepository.getTodos(userID: userID),
       onData: (todos) => state.copyWith(
         status: () => TodosOverviewStatus.success,
         todos: () => todos,
       ),
-      onError: (_, __) => state.copyWith(
-        status: () => TodosOverviewStatus.failure,
-      ),
+      onError: (_, __) {
+        return state.copyWith(
+          status: () => TodosOverviewStatus.failure,
+        );
+      },
     );
   }
 
@@ -46,7 +51,7 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
     Emitter<TodosOverviewState> emit,
   ) async {
     final newTodo = event.todo.copyWith(isCompleted: event.isCompleted);
-    await _todosRepository.saveTodo(newTodo);
+    await _todosRepository.editTodo(newTodo);
   }
 
   Future<void> _onTodoDeleted(
