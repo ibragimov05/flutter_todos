@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_todos/l10n/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:todos_repository/todos_repository.dart';
 
 import '../widgets/widgets.dart';
@@ -88,9 +89,7 @@ class TodosOverviewView extends StatelessWidget {
         child: BlocBuilder<TodosOverviewBloc, TodosOverviewState>(
           builder: (context, todoState) {
             if (todoState.todos.isEmpty) {
-              if (todoState.status == TodosOverviewStatus.loading) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (todoState.status != TodosOverviewStatus.success) {
+              if (todoState.status != TodosOverviewStatus.success) {
                 return const SizedBox();
               } else {
                 return Center(
@@ -103,31 +102,34 @@ class TodosOverviewView extends StatelessWidget {
             }
 
             return CupertinoScrollbar(
-              child: ListView.builder(
-                itemCount: todoState.todos.length,
-                itemBuilder: (context, index) {
-                  final todo = todoState.todos[index];
-                  return TodoListTile(
-                    todo: todo,
-                    onToggleCompleted: (isCompleted) => todoBloc.add(
-                      TodosOverviewTodoCompletionToggled(
-                        todo: todo,
-                        isCompleted: isCompleted,
+              child: Skeletonizer(
+                enabled: todoState.status == TodosOverviewStatus.loading,
+                child: ListView.builder(
+                  itemCount: todoState.todos.length,
+                  itemBuilder: (context, index) {
+                    final todo = todoState.todos[index];
+                    return TodoListTile(
+                      todo: todo,
+                      onToggleCompleted: (isCompleted) => todoBloc.add(
+                        TodosOverviewTodoCompletionToggled(
+                          todo: todo,
+                          isCompleted: isCompleted,
+                        ),
                       ),
-                    ),
-                    onDismissed: (_) {
-                      todoBloc.state.todos.removeWhere(
-                        (element) => element.id == todo.id,
-                      );
-                      todoBloc.add(
-                        TodosOverviewTodoDeleted(todo: todo),
-                      );
-                    },
-                    onTap: () => Navigator.of(context).push(
-                      EditTodoPage.route(initialTodo: todo),
-                    ),
-                  );
-                },
+                      onDismissed: (_) {
+                        todoBloc.state.todos.removeWhere(
+                          (element) => element.id == todo.id,
+                        );
+                        todoBloc.add(
+                          TodosOverviewTodoDeleted(todo: todo),
+                        );
+                      },
+                      onTap: () => Navigator.of(context).push(
+                        EditTodoPage.route(initialTodo: todo),
+                      ),
+                    );
+                  },
+                ),
               ),
             );
           },
