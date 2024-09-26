@@ -35,7 +35,7 @@ dependencies:
     path: packages/authentication_repository
   form_inputs:
     path: packages/form_inputs
-  cloud_firestore: ^5.4.0
+  cloud_firestore: ^5.4.3
   firebase_auth: ^5.2.0
   skeletonizer: ^1.4.2
 
